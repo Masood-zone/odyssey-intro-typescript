@@ -5,6 +5,20 @@ type Query {
   listing(id: ID!): Listing
 }
 
+type Mutation {
+  "Create a new listing"
+  createListing(input: CreateListingInput!): CreateListingResponse!
+}
+
+input CreateListingInput {
+  title: String!
+  description: String!
+  numOfBeds: Int!
+  costPerNight: Float!
+  closedForBookings: Boolean
+  amenities: [ID!]!
+}
+
 "A particular intergalactic location available for booking"
 type Listing {
   id: ID!
@@ -20,4 +34,11 @@ type Amenity {
   id: ID!
   category: String!
   name: String!
+}
+
+type CreateListingResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+  listing: Listing
 }
